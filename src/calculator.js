@@ -1,6 +1,10 @@
 var Calculator =  (function () {
   
   var stack = [];
+
+  var operations = {
+    add: function(a, b) { return a + b; }
+  };
   
   var isNumber = function (n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
@@ -11,10 +15,9 @@ var Calculator =  (function () {
     return stack[0];
   };
 
-  var process = function () {
+  var compute = function () {
     var operators = stack.filter(isNaN),
           numbers = stack.filter(isNumber);      
-
     if(operators.length === 0) return last();
     
   };
@@ -27,15 +30,21 @@ var Calculator =  (function () {
 
   equal = function () {
 
-    var total = process();
+    var total = compute();
 
     return total;
-  };
+  },
 
+  clear = function () {
+    stack = [0]; 
+    return equal();
+  };
+  
   return {
     'input' : input,
-    'equal' : equal
-  }
+    'equal' : equal,
+    'clear' : clear
+  };
 
 }());
 
