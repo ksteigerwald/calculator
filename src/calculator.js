@@ -7,19 +7,20 @@ var Calculator =  (function () {
   };
   
   var isNumber = function (n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
+    return !isNaN(parseFloat(n)) && isFinite(n);
   };
  
   var last = function () {
     stack = [stack[stack.length -1]];
-    return stack[0];
+    return stack[0] || 0;
   };
 
   var compute = function () {
     var operators = stack.filter(isNaN),
           numbers = stack.filter(isNumber);      
     if(operators.length === 0) return last();
-    
+    //return operations.add.apply(this,numbers);
+    return numbers.reduce(operations.add);
   };
 
   /* public */ 
@@ -31,13 +32,14 @@ var Calculator =  (function () {
   equal = function () {
 
     var total = compute();
+        stack = [total];
 
     return total;
   },
 
   clear = function () {
-    stack = [0]; 
-    return equal();
+    stack = []; 
+    return 0;
   };
   
   return {
