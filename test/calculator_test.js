@@ -6,4 +6,10 @@ function isEven(val) {
 test('Recives Input, returns output', function() { 
   Calculator.input(12);
   strictEqual(Calculator.equal(), 12);
-})  
+  Calculator.input(15);
+  strictEqual(Calculator.equal(), 15);
+});
+
+
+
+
