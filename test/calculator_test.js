@@ -30,3 +30,13 @@ test("Add", function() {
   Calculator.input(10); 
   strictEqual(Calculator.equal(), 74);
 });
+
+test("Subtract", function() {
+  Calculator.input(10); 
+  Calculator.input('subtract'); 
+  Calculator.input(5);
+  strictEqual(Calculator.equal(), 5);
+  Calculator.input(2);
+  Calculator.input('subtract'); 
+  strictEqual(Calculator.equal(), 3);
+});

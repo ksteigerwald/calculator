@@ -3,7 +3,8 @@ var Calculator =  (function () {
   var stack = [];
 
   var operations = {
-    add: function(a, b) { return a + b; }
+    add: function(a, b) { return a + b; },
+    subtract: function (a, b) { return a - b; } 
   };
   
   var isNumber = function (n) {
@@ -20,7 +21,8 @@ var Calculator =  (function () {
           numbers = stack.filter(isNumber);      
     if(operators.length === 0) return last();
     //return operations.add.apply(this,numbers);
-    return numbers.reduce(operations.add);
+    //return numbers.reduce(operations.add);
+    return numbers.reduce(operations.subtract);
   };
 
   /* public */ 
