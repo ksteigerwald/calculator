@@ -6,14 +6,15 @@ module('Calculator Unit Test', {
 });
 
 test("Clear", function() {
+  Calculator.clear(); 
   strictEqual(Calculator.equal(), 0);
 });
 
 test('Recives Input, returns output', function() { 
- // Calculator.input(12);
- // strictEqual(Calculator.equal(), 12);
- // Calculator.input(15);
- // strictEqual(Calculator.equal(), 15);
+  Calculator.input(12);
+  strictEqual(Calculator.equal(), 12);
+  Calculator.input(15);
+  strictEqual(Calculator.equal(), 15);
 });
 
 test("Add", function() {
@@ -40,4 +41,9 @@ test("Subtract", function() {
   Calculator.input(2);
   Calculator.input('subtract'); 
   strictEqual(Calculator.equal(), 3, '2 - 3');
+});
+
+test("Add & Subtract", function() {
+  Calculator.input(5).input('add').input(12).input('subtract').input(4);
+  strictEqual(Calculator.equal(), 13, '5+12-4=13');
 });

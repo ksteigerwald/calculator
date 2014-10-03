@@ -19,33 +19,25 @@ var Calculator =  (function () {
       return function (b) {
         return a - b; 
       }; 
-    } 
+    },
+
+    divide: function (a) {
+      return  function (b) {
+        return b / a; 
+      };
+    },
+
+    multiply: function (a) {
+      return function (b) {
+        return a * b; 
+      };  
+    }
   };
   
   var isNumber = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   };
- 
-  var last = function () {
-    stack = [stack[stack.length -1]];
-    return stack[0] || 0;
-  };
-
-  var compute = function () {
-    var operators = stack.filter(isNaN),
-          numbers = stack.filter(isNumber);      
-    if(operators.length === 0) return last();
-    //console.log(numbers,'::', stack,stack.indexOf('add'));
-    //return operations.add.apply(this,numbers);
-    return curry(operations.add,'add')(numbers);
-    //return numbers.reduce(operations.subtract);
-  };
-
-  var commulate = function (val) {
-    return (memory !== 0 && stack.lenght === 0) ? val + memory : val;  
-  };
-
-
+  
   /* public */ 
 
   var input = function (val) {
@@ -62,6 +54,7 @@ var Calculator =  (function () {
       stack.push(operations[val](memory));  
     }
     console.log("input:".concat(val, " memory:", memory, " stack:", stack));
+    return this;
   },
 
   equal = function () {
