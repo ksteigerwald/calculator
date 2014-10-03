@@ -1,15 +1,10 @@
 var Calculator =  (function () {
   
-  var stack = [], memory = 0, tail = 0;
+  var stack = [], memory = 0; 
 
   var operations = {
-    value: function (val) {
-      return function () {
-        return val; 
-      };  
-    },
 
-    add: function(a) { 
+   add: function(a) { 
       return function(b) { 
         return a + b; 
       };
@@ -53,7 +48,6 @@ var Calculator =  (function () {
     else {
       stack.push(operations[val](memory));  
     }
-    console.log("input:".concat(val, " memory:", memory, " stack:", stack));
     return this;
   },
 
@@ -64,7 +58,7 @@ var Calculator =  (function () {
   clear = function () {
     stack = []; 
     memory = 0;
-    return 0;
+    return memory;
   };
   
   return {
