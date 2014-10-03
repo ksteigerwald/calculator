@@ -18,7 +18,7 @@ var Calculator =  (function () {
 
     divide: function (a) {
       return  function (b) {
-        return b / a; 
+        return  a / b; 
       };
     },
 

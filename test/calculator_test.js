@@ -43,8 +43,8 @@ test("Multiply", function() {
 });
 
 test("Divide", function() {
-  Calculator.input(5).input('divide').input(50); 
-  strictEqual(Calculator.equal(), 10, '5/50 = 10');
+  Calculator.input(50).input('divide').input(5); 
+  strictEqual(Calculator.equal(), 10, '50/5= 10');
 });
 
 test("Decimals", function() {

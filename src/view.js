@@ -87,7 +87,6 @@ var CalculatorView = (function () {
   },
   
   _setDisplay = function () {
-    console.log(Calculator.equal(), 'setDis');
     $display.value = Calculator.equal(); 
   },
 
