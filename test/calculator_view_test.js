@@ -1,13 +1,16 @@
 module('Calculator View Unit Test', {
   setup: function () {
-    CalculatorView.init('#calculator'); 
   }
 });
 
-function isInPage(node) {
-    return (node === document.body) ? false : document.body.contains(node);
-}
+test("false view", function() {
+  equal(CalculatorView.init(), false);
+});
 
 test("init view", function() {
-  ok(document.getElementById('#calculator') !== null);
+  CalculatorView.init('#calculator'); 
+  var $el = document.getElementById('#calculator');
+  ok($el !== null);
+  strictEqual($el.getAttribute('class'), 'calculator');
 });
+

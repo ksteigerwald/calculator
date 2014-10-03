@@ -32,13 +32,13 @@ a {
     transition: .3s;
 }
 
-section#calculator {
+.calculator {
   margin:0 auto;
   max-width:400px;
   border: 1px solid;
   overflow:hidden;
 }
-section#calculator ul li {
+.calculator ul li {
   float:left;
   width:100px;
   height:50px;
