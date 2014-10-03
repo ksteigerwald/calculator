@@ -40,6 +40,8 @@ a {
 }
 .calculator ul li {
   float:left;
-  width:100px;
+  width:90px;
   height:50px;
+  border-right:1px solid;
+  border-bottom:1px solid;
 }

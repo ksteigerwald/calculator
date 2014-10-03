@@ -25,10 +25,11 @@ var CalculatorView = (function () {
        '<li data-fn="subtract">-</li>',
        '<li>0</li>',
        '<li>.</li>',
-       '<li data-event="equal">=</li>',
+       '<li data-fn="equal">=</li>',
        '<li data-fn="add">+</li>',
        ' </ul>'].join("\n"),
-       $display;
+       $display,
+       closeArgument = false;
 
   var _create_element =  function () {
 
@@ -47,29 +48,59 @@ var CalculatorView = (function () {
   _readVal = function () {
     return $display.value;   
   },
-  
+
+  _parseEvents =  function (ar) {
+    return ar.split('=');
+  },
+
+   _showEqual =  function () {
+     _updateInput();
+     $display.value = Calculator.equal(); 
+     closeArgument = true;
+   },
+
+   _handler = function (evt) {
+    if(evt == 'clear') return Calculator.clear();
+    if(evt == 'equal') return _showEqual();
+    _updateInput();
+    Calculator.input(evt);
+    _setDisplay();
+    closeArgument = true;
+  },
+
   _operation = function(attrs) {
     if(attrs.length <= 0) return false;
-    console.log(_readVal(), attrs[0]);
-    Calculator.input(_readVal()); 
-    Calculator.input(attrs[0]); 
+    var evt = attrs[0].value;
+    _handler(evt); 
     return true;
   },
+
+  _updateInput = function () {
+    var val = Number($display.value);
+    Calculator.input(val);
+  },
+
+  _updateDisplay = function (val) {
+    if(closeArgument) $display.value = '';
+    $display.value = $display.value.concat(val); 
+    closeArgument = false;
+  },
   
-  _updateDisplay = function (el) {
-    var value = Number($display.value.concat(el.textContent));
-    $display.value = value; 
+  _setDisplay = function () {
+    console.log(Calculator.equal(), 'setDis');
+    $display.value = Calculator.equal(); 
   },
 
   _events = function (e) {
     e.onmousedown =  function (el) {
       var isOperation =  _operation(el.target.attributes);
       if(isOperation) return false;
-      _updateDisplay(el.target);   
+      _updateDisplay(el.target.textContent);   
     };
   },
 
   _render = function () {
+
     $el.innerHTML = html;
     var list = document.querySelectorAll('.calculator ul li');
 
