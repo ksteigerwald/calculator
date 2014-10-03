@@ -1,4 +1,3 @@
-
 module('Calculator Unit Test', {
   setup: function() {
     Calculator.clear(); 
@@ -20,10 +19,8 @@ test('Recives Input, returns output', function() {
 test("Add", function() {
   Calculator.input(1).input('add').input(1); 
   strictEqual(Calculator.equal(), 2, '1 + 1 = 2');
-
   Calculator.input('add').input(51).input('add').input(11); 
   strictEqual(Calculator.equal(), 64, '2 + 51 + 11 = 64');
-
   Calculator.input('add').input(10); 
   strictEqual(Calculator.equal(), 74, '64 + 10 = 74');
 });
@@ -31,7 +28,6 @@ test("Add", function() {
 test("Subtract", function() {
   Calculator.input(10).input('subtract').input(5);
   strictEqual(Calculator.equal(), 5, '10 - 5 = 5');
-
   Calculator.input('subtract').input(2).input('subtract'); 
   strictEqual(Calculator.equal(), 3, '2 - 3');
 });
