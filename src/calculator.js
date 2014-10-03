@@ -1,4 +1,4 @@
-var Calculator =  (function () {
+var Calculator =  (function (View) {
   
   var stack = [], memory = 0; 
 
@@ -59,13 +59,18 @@ var Calculator =  (function () {
     stack = []; 
     memory = 0;
     return memory;
+  },
+
+  initializeView = function (el) {
+    View.init(el); 
   };
   
   return {
     'input' : input,
     'equal' : equal,
-    'clear' : clear
+    'clear' : clear,
+    'init' : initializeView
   };
 
-}());
+}(CalculatorView));
 

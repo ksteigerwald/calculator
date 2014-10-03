@@ -3,13 +3,19 @@
   <head>  
     <title>Kris Steigerwald's Calculator</title>  
     <link rel="stylesheet" href="style.css" type="text/css" media="screen">  
-    <!-- Your project file goes here -->  
-    <script type="text/javascript" src="src/calculator.js"></script> 
+    <link
+    href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext'
+    rel='stylesheet' type='text/css'>
+   <!-- Your project file goes here -->  
     <!-- Your tests file goes here -->  
   </head>  
   <body>  
     <section id="calculator">
     </section>
+    <script type="text/javascript" src="src/view.js"></script> 
+    <script type="text/javascript" src="src/calculator.js"></script> 
+    <script type="text/javascript" charset="utf-8">
+      Calculator.init('#calculator');
+    </script>
   </body>  
-</html>  
-
+</html> 
