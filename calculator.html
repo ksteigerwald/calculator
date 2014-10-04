@@ -13,7 +13,9 @@
     <script type="text/javascript" src="src/view.js"></script> 
     <script type="text/javascript" src="src/calculator.js"></script> 
     <script type="text/javascript" charset="utf-8">
-      Calculator.init('#calculator');
+      window.onload = function () {
+        Calculator.init('#calculator');
+      };
     </script>
   </body>  
 </html> 
