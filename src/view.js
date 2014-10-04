@@ -31,7 +31,7 @@ var CalculatorView = (function () {
     $display,
     closeArgument = false;
 
-  var _create_element =  function () {
+  var createElement  =  function () {
 
     var el = document.createElement('div'); 
     el.setAttribute('id',selector);
@@ -41,8 +41,8 @@ var CalculatorView = (function () {
     return el;
   },
 
-  _find_or_create = function (el) {
-    return document.getElementById(el) || _create_element();
+  findOrCreate  = function (el) {
+    return document.getElementById(el) || createElement();
   },
 
   _showEqual =  function () {
@@ -55,7 +55,7 @@ var CalculatorView = (function () {
     Calculator.clear();
     $display.value = Calculator.equal(); 
   },
-
+  
   _handler = function (evt) {
     if(evt == 'clear') return _clearDisplay();
     if(evt == 'equal') return _showEqual();
@@ -110,7 +110,7 @@ var init = function (el, options) {
   if(el === undefined) return false;
 
   selector = el;
-  $el = _find_or_create(selector);
+  $el = findOrCreate(selector);
   _render();
 };
 
