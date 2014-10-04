@@ -7,26 +7,11 @@ var CalculatorView = (function () {
     ' <input disabled type="text" id="display"/ >',
     '</header>',
     '<ul>',
-    '<li data-fn="clear">C</li>',
-    '<li></li>',
-    '<li></li>',
-    '<li></li>',
-    '<li>7</li>',
-    '<li>8</li>',
-    '<li>9</li>',
-    '<li data-fn="divide">%</li>',
-    '<li>4</li>',
-    '<li>5</li>',
-    '<li>6</li>',
-    '<li data-fn="multiply">x</li>',
-    '<li>1</li>',
-    '<li>2</li>',
-    '<li>3</li>',
-    '<li data-fn="subtract">-</li>',
-    '<li>0</li>',
-    '<li>.</li>',
-    '<li data-fn="equal">=</li>',
-    '<li data-fn="add">+</li>',
+    '<li data-fn="clear">C</li><li></li><li></li><li></li>',
+    '<li>7</li><li>8</li><li>9</li><li data-fn="divide">%</li>',
+    '<li>4</li><li>5</li><li>6</li><li data-fn="multiply">x</li>',
+    '<li>1</li><li>2</li><li>3</li><li data-fn="subtract">-</li>',
+    '<li>0</li><li>.</li><li data-fn="equal">=</li><li data-fn="add">+</li>',
     ' </ul>'].join("\n"),
     $display,
     closeArgument = false;
@@ -104,18 +89,18 @@ var CalculatorView = (function () {
     [].slice.call(list).map(_events);
   };
 
-/* Public */
+  /* Public */
 
-var init = function (el, options) {
-  if(el === undefined) return false;
+  var init = function (el, options) {
+    if(el === undefined) return false;
 
-  selector = el;
-  $el = findOrCreate(selector);
-  _render();
-};
+    selector = el;
+    $el = findOrCreate(selector);
+    _render();
+  };
 
-return {
-  'init' : init
-};
+  return {
+    'init' : init
+  };
 
 }());
