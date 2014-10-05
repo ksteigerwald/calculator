@@ -3,15 +3,15 @@ var CalculatorView = (function () {
   var selector,
     $el,
     html = [
-  '<header>',
-    ' <input disabled type="text" id="display"/ >',
-    '</header>',
+      '<header>',
+        ' <input disabled type="text" id="display"/ >',
+      '</header>',
     '<ul>',
-    '<li data-fn="clear">C</li><li></li><li></li><li></li>',
-    '<li>7</li><li>8</li><li>9</li><li data-fn="divide">%</li>',
-    '<li>4</li><li>5</li><li>6</li><li data-fn="multiply">x</li>',
-    '<li>1</li><li>2</li><li>3</li><li data-fn="subtract">-</li>',
-    '<li>0</li><li>.</li><li data-fn="equal">=</li><li data-fn="add">+</li>',
+      '<li data-fn="clear">C</li><li></li><li></li><li></li>',
+      '<li>7</li><li>8</li><li>9</li><li data-fn="divide">%</li>',
+      '<li>4</li><li>5</li><li>6</li><li data-fn="multiply">x</li>',
+      '<li>1</li><li>2</li><li>3</li><li data-fn="subtract">-</li>',
+      '<li>0</li><li>.</li><li data-fn="equal">=</li><li data-fn="add">+</li>',
     ' </ul>'].join("\n"),
     $display,
     closeArgument = false;
@@ -30,17 +30,54 @@ var CalculatorView = (function () {
     return document.getElementById(el) || createElement();
   },
 
+  compose = function() {
+    var funcs = arguments;
+    return function() {
+        var args = arguments;
+        for (var i = funcs.length; i --> 0;) {
+          console.log(funcs[i]);
+            args = [funcs[i].apply(this, args)];
+        }
+        return args[0];
+    };
+  }, 
+
   _showEqual =  function () {
     _updateInput();
     $display.value = Calculator.equal(); 
     closeArgument = true;
   },
-  
+
   _clearDisplay = function () {
     Calculator.clear();
     $display.value = Calculator.equal(); 
   },
+
+  _updateInput = function () {
+    var val = Number($display.value);
+    Calculator.input(val);
+  },
+
+  _updateDisplay = function (val) {
+    //if(closeArgument) $display.value = '';
+    $display.value = val; 
+    return false;
+    //closeArgument = false;
+  },
   
+  _logInput = function (val) {
+    return $display.value.concat(val); 
+  },
+
+  _wipeDisplay = function () {
+    if(closeArgument) $display.value = '';
+    return true;
+  },
+
+  _setDisplay = function () {
+    $display.value = Calculator.equal(); 
+  },
+
   _handler = function (evt) {
     if(evt == 'clear') return _clearDisplay();
     if(evt == 'equal') return _showEqual();
@@ -50,33 +87,28 @@ var CalculatorView = (function () {
     closeArgument = true;
   },
 
+  _setArgument = function (bool) {
+    closeArgument = bool; 
+  },
+
   _operation = function(attrs) {
     if(attrs.length <= 0) return false;
     var evt = attrs[0].value;
     _handler(evt); 
     return true;
   },
-
-  _updateInput = function () {
-    var val = Number($display.value);
-    Calculator.input(val);
-  },
-
-  _updateDisplay = function (val) {
-    if(closeArgument) $display.value = '';
-    $display.value = $display.value.concat(val); 
-    closeArgument = false;
-  },
-
-  _setDisplay = function () {
-    $display.value = Calculator.equal(); 
+  
+  _display = function () {
+    _wipeDisplay();
+    return compose.apply(this, arguments);
   },
 
   _events = function (e) {
     e.onmousedown =  function (el) {
       var isOperation = _operation(el.target.attributes);
       if(isOperation) return false;
-      _updateDisplay(el.target.textContent);   
+      _display(_setArgument, _updateDisplay, _logInput)(el.target.textContent);
+      //_updateDisplay(el.target.textContent);   
     };
   },
 
