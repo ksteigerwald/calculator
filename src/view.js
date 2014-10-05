@@ -97,12 +97,10 @@ var CalculatorView = (function () {
       case 'clear':
         return compose(_clearDisplay, _clearCalculator)();
       case 'equal':
-        compose(_setArgument, _showEqual, _updateInput)(currentValue);
-        break;
+        return compose(_setArgument, _showEqual, _updateInput)(currentValue);
       default:
         var op = _triggerOperation(currentValue);
-        compose(_setArgument, _setDisplay, op)(evt);
-        break;
+        return compose(_setArgument, _setDisplay, op)(evt);
     }
 
   },
